@@ -1,0 +1,1 @@
+{"id":"cdfc7be8-ec7b-4446-a515-c97875d17cc0","space":43498,"runtime":"python3.9","name":"my-micro","path":"ouynwl","project":"b0w8urv1","account":"144798365827","region":"us-east-1","deps":["fastapi"],"envs":null,"public":true,"log_level":"off","cron":""}
