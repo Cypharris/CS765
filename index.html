@@ -86,20 +86,20 @@
         
     </div>
 
-    <form class="ml-3" onsubmit="updateGroupingsSize()">
+    <form class="ml-3" >
         <label for="fname">Minimum size of groupings:</label>
         <input id="groupings-input" type="number" >
-        <input type="submit" value="Update">
+        <input type="button" onclick="updateGroupingsSize()" value="Update">
     </form>
-    <form class="ml-3" onsubmit="updateCombinationsSize()">
+    <form class="ml-3"">
         <label for="fname">Minimum number of combinations:</label>
         <input id="combinations-input" type="number" >
-        <input type="submit" value="Update">
+        <input type="button" onclick="updateCombinationsSize()" value="Update">
     </form>
     <form class="ml-3" onsubmit="updateQuery()">
         <label for="fname">Query for Intersectional Groupings (comma seperated): </label>
         <input id="query-input" placeholder="Age: 15-35,Male" type="text" >
-        <input type="submit" value="Update">
+        <input type="button" onclick="updateQuery()" value="Update">
     </form>
 
 
