@@ -100,12 +100,27 @@ const yearGroupings = [
   }
 ];
 
+const workGroupings = [
+  {
+    category: 'Work Time: 0-500',
+    value: 197632,
+  },
+  {
+    category: 'Work Time: 501-1000',
+    value: 30496,
+  },
+  {
+    category: 'Work Time: 1001-1440',
+    value: 327,
+  }
+];
+
 function updateBasicChart(selectedVar) {
 
   // const data = {'sample1':sample1, 'sample2':sample2}
   const data = {'Age':ageGroupings, 'Employment Status':empGroupings, 'Sex':sexGroupings
   , 'Education Level':educationGroupings, 'Number of Children':childGroupings, 'Life Partner':partnerGroupings, 
-  'Surveyed Year':yearGroupings}
+  'Surveyed Year':yearGroupings, 'Work Time':workGroupings}
   
   const svg = d3version5.select("#svg_basic");
   svg.selectAll('*').remove();
@@ -287,7 +302,7 @@ if (query!=""){
 // console.log(combinations);
 const props = {
   sets: sets,
-  width: 1300,
+  width: 1400,
   height: 600,
   combinations: combinations,
   // queries: [{name: queryStr, color: colorsList[0], set: combinations.find((d) => d["name"] === queryStr)},],

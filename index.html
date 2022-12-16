@@ -35,6 +35,7 @@
         </div>
       </nav>
       <div class="bg-color">If something stops working, try refreshing the page. It will reset everything.</div>
+      <div class="bg-color2">Wait ~10s for the second visualization to load. It takes some time to receive data from the server.</div>
     <h3 class="mt-3">Visualize Single Variable Groupings</h3>
 
     <div class="dropdown mt-3">
@@ -44,6 +45,7 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" onclick="updateBasicChart('Sex')" href="#">Sex</a>
           <a class="dropdown-item" onclick="updateBasicChart('Age')" href="#">Age</a>
+          <a class="dropdown-item" onclick="updateBasicChart('Work Time')" href="#">Work Time (minutes)</a>
           <a class="dropdown-item" onclick="updateBasicChart('Employment Status')" href="#">Employment Status</a>
           <a class="dropdown-item" onclick="updateBasicChart('Education Level')" href="#">Education Level</a>
           <a class="dropdown-item" onclick="updateBasicChart('Number of Children')" href="#">Number of Children</a>
@@ -69,6 +71,9 @@
           <a class="dropdown-item" onclick="fetchSet('Age: 15-35')" href="#">Age: 15-35</a>
           <a class="dropdown-item" onclick="fetchSet('Age: 36-55')" href="#">Age: 36-55</a>
           <a class="dropdown-item" onclick="fetchSet('Age: 56-85')" href="#">Age: 56-85</a>
+          <a class="dropdown-item" onclick="fetchSet('Work Time: 0-500')" href="#">Work Time (mins): 0-500</a>
+          <a class="dropdown-item" onclick="fetchSet('Work Time: 501-1000')" href="#">Work Time (mins): 501-1000</a>
+          <a class="dropdown-item" onclick="fetchSet('Work Time: 1001-1440')" href="#">Work Time (mins): 1001-1440</a>
           <a class="dropdown-item" onclick="fetchSet('Grade 1-8')" href="#">Education done: Grade 1-8</a>
           <a class="dropdown-item" onclick="fetchSet('High School')" href="#">Education done: High School</a>
           <a class="dropdown-item" onclick="fetchSet('Undergraduate')" href="#">Education done: Undergraduate</a>
