@@ -250,16 +250,15 @@ updateBasicChart('Sex');
 
 const setData = [];
 var combinations = null;
-var colorsList = ["lightblue", "lightgreen,", "purple", "steelblue", "darkred", "darkgreen"];
-// var queriesList = [{ name: "queryStr", color: colorsList[0], set: combinations.find((d) => d["name"] === "(Age: 15-35 ∩ Male)") }];
-var queriesList = [];
+var colorsList = ["lightblue", "purple", "steelblue", "darkred", "darkgreen"];
+const queriesList = [];
 
 function updateUpsetPlot(call_func) {
+  document.getElementById("upset-plot").innerHTML = '';
 
 const sets = UpSetJS.asSets(setData);
 
 if (call_func == "initial" || call_func == "fetchSet" ){
-  console.log(call_func)
     combinations = UpSetJS.generateCombinations(sets, {
       "type": "intersection",
       "min": 1,
@@ -269,20 +268,50 @@ if (call_func == "initial" || call_func == "fetchSet" ){
     });
 }
 
-console.log(combinations);         //###### cardinality filter, can do same for the degree ######
+query = document.getElementById("query-input").value;
+var queryStr = ""
 
+if (query!=""){
+  queryList = query.split(",");
+  queryStr = "("
+  for (let i = 0; i < queryList.length; i++) {
+    const element = queryList[i];
+    if(i != queryList.length - 1){
+      queryStr += element + " ∩ ";
+    }
+    else{
+      queryStr += element + ")";
+    }
+  }
+}
+// console.log(combinations);
 const props = {
   sets: sets,
   width: 1300,
   height: 600,
   combinations: combinations,
-  queries: queriesList,
+  // queries: [{name: queryStr, color: colorsList[0], set: combinations.find((d) => d["name"] === queryStr)},],
+  // queries:queriesList,
   selection: null,
   setName: 'Categories',
   combinationName: 'Intersectional Groupings Size'
 }
-console.log(props);
-console.log(queriesList);
+// console.log(queryStr);
+// console.log(combinations);
+
+var foundQuery = false;
+for (let i = 0; i < combinations.length; i++) {
+  if(combinations[i]["name"] == queryStr){
+    foundQuery = true;
+  }
+}
+
+if(queryStr != "" && foundQuery){
+  props["queries"] = [{name: queryStr, color: colorsList[0], set: combinations.find((d) => d["name"] === queryStr)}]
+} else {
+  props["queries"] = [];
+}
+
 
 props.onHover = (set) => {
   props.selection = set;
@@ -352,6 +381,9 @@ async function fetchInitialSets(){
     'Age: 15-35',
     'Male',
     'Female']
+  // var initialSetNames = [
+  //   'Age: 15-35',
+  //   'Male']
 
   for (let i = 0; i < initialSetNames.length; i++) {
     const currSet = initialSetNames[i];
@@ -374,7 +406,6 @@ async function fetchInitialSets(){
 }
 
 async function fetchSet(setName){
-  console.log("Cliked " + setName);
   for(i = 0; i < setData.length; i++) {
     if(setData[i]["name"] == setName) {
       setData.splice(i, 1);
@@ -398,7 +429,7 @@ async function fetchSet(setName){
 
     let setReceived = await response.json();
     setData.push(setReceived);
-    queriesList = [];
+    queriesList.splice(0,queriesList.length);
     updateUpsetPlot("fetchSet");
     return;
 }
@@ -428,23 +459,22 @@ function updateGroupingsSize(){
 }
 
 function updateQuery(){
-  query = document.getElementById("query-input").value;
-  queryList = query.split(",");
+  // query = document.getElementById("query-input").value;
+  // queryList = query.split(",");
 
-  queryStr = "("
-  for (let i = 0; i < queryList.length; i++) {
-    const element = queryList[i];
-    if(i != queryList.length - 1){
-      queryStr += element + " ∩ ";
-    }
-    else{
-      queryStr += element + ")";
-    }
-  }
-  // queriesList.push({ name: queryStr, color: colorsList[0], set: combinations.find((d) => d["name"] === queryStr) })
-  queriesList.push({ name: "queryStr", color: colorsList[0], set: combinations.find((d) => d["name"] === "(Age: 15-35 ∩ Male)")});
-  colorsList.splice(0,1);
+  // queryStr = "("
+  // for (let i = 0; i < queryList.length; i++) {
+  //   const element = queryList[i];
+  //   if(i != queryList.length - 1){
+  //     queryStr += element + " ∩ ";
+  //   }
+  //   else{
+  //     queryStr += element + ")";
+  //   }
+  // }
+  // queriesList.push({ name: queryStr, color: colorsList[0], set: combinations.find((d) => d["name"] === queryStr)});
+  // // queriesList.push({ name: "S1 n S2", color: colorsList[0], set: combinations.find((d) => d["name"] === "(Age: 15-35 ∩ Male)")});
+  // colorsList.splice(0,1);
   // console.log(queriesList);
-  updateUpsetPlot("initial");
-  return;
+  updateUpsetPlot("query");
 }

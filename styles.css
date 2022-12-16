@@ -71,3 +71,7 @@ body {
 .bg-light {
     background-color: rgb(242 206 99) !important;
 }
+
+.bg-color {
+    background-color: rgb(252, 134, 134) !important;
+}
